@@ -1,4 +1,4 @@
-package br.com.danielwisky.pibbaeta.repository;
+package br.com.danielwisky.pibbaeta.repositories;
 
 import br.com.danielwisky.pibbaeta.models.TipoProgramacao;
 import org.springframework.data.mongodb.repository.MongoRepository;

@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class FirebaseConfig {
 
   @Id
-  private Integer id;
+  private String id;
   private String url;
   private String apikey;
 }

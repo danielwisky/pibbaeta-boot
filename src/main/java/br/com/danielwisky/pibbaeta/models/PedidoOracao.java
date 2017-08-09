@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class PedidoOracao {
 
   @Id
-  private Long id;
+  private String id;
   private String nome;
   private String email;
   private String telefone;

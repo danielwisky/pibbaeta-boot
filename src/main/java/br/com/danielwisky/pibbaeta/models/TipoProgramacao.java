@@ -11,6 +11,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class TipoProgramacao {
 
   @Id
-  private Integer id;
+  private String id;
   private String descricao;
 }
