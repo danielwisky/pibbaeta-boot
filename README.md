@@ -1,1 +1,5 @@
-# pibbaeta-boot
+# API PIBaeta
+
+* Spring Boot
+* Thymeleaf
+* MongoDB
