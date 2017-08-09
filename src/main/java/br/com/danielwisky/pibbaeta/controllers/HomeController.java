@@ -8,9 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController {
 
   @RequestMapping("/")
-  public ModelAndView index() {
-    ModelAndView modelAndView = new ModelAndView("index");
-    modelAndView.addObject("menu", "home");
-    return modelAndView;
+  public String index() {
+    return "application";
   }
 }

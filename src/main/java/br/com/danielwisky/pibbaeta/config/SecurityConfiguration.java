@@ -1,6 +1,7 @@
 package br.com.danielwisky.pibbaeta.config;
 
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -18,5 +19,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .anyRequest().authenticated()
         .and().formLogin().loginPage("/login").permitAll()
         .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+  }
+
+  @Override
+  public void configure(WebSecurity web) throws Exception {
+    web.ignoring().antMatchers("/css/**", "/images/**", "/js/**", "/plugins/**");
   }
 }
