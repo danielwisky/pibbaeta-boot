@@ -1,5 +1,6 @@
 package br.com.danielwisky.pibbaeta.models;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -8,8 +9,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @EqualsAndHashCode(of = "id")
-@Document(collection = "pedidoOracao")
-public class PedidoOracao {
+@Document(collection = PedidoOracao.COLLECTION)
+public class PedidoOracao implements Serializable {
+
+  public static final String COLLECTION = "pedidoOracao";
 
   @Id
   private String id;
