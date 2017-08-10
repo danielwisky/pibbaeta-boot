@@ -1,4 +1,4 @@
-# API PIBaeta
+# API PIBBaeta
 
 * Spring Boot
 * Thymeleaf
@@ -26,6 +26,9 @@ db.usuario.insert({
     "email": "teste@teste.com.br",
     "senha": "$2a$10$bVVGBTJW.eotUJvxeZkEEuop69ZEuhFAyLBIBS9KGC2xwITVYVwGi",
     "status": "ATIVO",
-    "papeis": [{"_class" : "br.com.danielwisky.pibbaeta.models.Papel","descricao" : "ROLE_ADMIN"}, {"_class" : "br.com.danielwisky.pibbaeta.models.Papel","descricao" : "ROLE_USER"}]
+    "papeis": [
+        {"_class" : "br.com.danielwisky.pibbaeta.models.Papel","descricao" : "ROLE_ADMIN"}, 
+        {"_class" : "br.com.danielwisky.pibbaeta.models.Papel","descricao" : "ROLE_USER"}
+    ]
 });
 ```
