@@ -1,24 +1,19 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{sistema.titulo}</title>
-
-  <link rel="icon" href="images/favicon.ico">
-  <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="css/style.css" />
-
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-    <script src="http://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="http://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: site-head"></head>
 <body>
 
+  <th:block th:replace="layout :: site-navbar"></th:block>
+
+  <div class="container">
+    <div class="starter-template">
+      <h1 th:text="#{sistema.titulo}"></h1>
+      <p class="lead">Nossas dúvidas são traidoras e nos fazem perder o bem que poderíamos conquistar se não fosse o medo de errar. (William Shakespeare)</p>
+    </div>
+
+    <th:block th:replace="layout :: site-footer"></th:block>
+  </div><!-- /container -->
+
+  <th:block th:replace="layout :: site-script"></th:block>
 </body>
 </html>

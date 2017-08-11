@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
@@ -25,6 +26,7 @@ public class Programacao implements Serializable {
   private String endereco;
   private String urlBanner;
   private TipoProgramacao tipo;
-  private LocalDateTime dataAtualizacao = LocalDateTime.now();
+  @LastModifiedDate
+  private LocalDateTime dataAtualizacao;
   private Status status = Status.ATIVO;
 }

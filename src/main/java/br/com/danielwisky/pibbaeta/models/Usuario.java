@@ -1,14 +1,15 @@
 package br.com.danielwisky.pibbaeta.models;
 
 import br.com.danielwisky.pibbaeta.models.enums.Status;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Data
@@ -26,12 +27,12 @@ public class Usuario implements UserDetails {
   private String senha;
   private String novaSenha;
   private String confirmarSenha;
-  private List<Papel> papeis = new ArrayList<Papel>();
+  private List<String> papeis;
   private Status status = Status.ATIVO;
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return this.papeis;
+    return papeis.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
   }
 
   @Override

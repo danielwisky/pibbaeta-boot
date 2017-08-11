@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
   private UsuarioRepository usuarioRepository;
 
