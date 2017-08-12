@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title th:text="#{sistema.titulo}"></title>
+
+  <link rel="icon" href="images/favicon.ico" th:href="@{/images/favicon.ico}" />
+  <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}" />
+  <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css" th:href="@{/plugins/font-awesome/css/font-awesome.min.css}" />
+  <th:block layout:fragment="extraStyles" />
+  <link rel="stylesheet" href="css/style.css" th:href="@{/css/style.css}" />
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="http://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+
+  <th:block th:replace="_fragments/nav :: navbar" />
+
+  <div class="container">
+    <th: block layout:fragment="content" />
+
+    <hr>
+
+    <th:block th:replace="_fragments/footer :: footer" /><!-- /.footer -->
+  </div><!-- /container -->
+
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="plugins/jquery/jquery.min.js" th:src="@{/plugins/jquery/jquery.min.js}"></script>
+  <script src="plugins/bootstrap/js/bootstrap.min.js" th:src="@{/plugins/bootstrap/js/bootstrap.min.js}"></script>
+  <script src="js/application.js" th:src="@{/js/application.js}"></script>
+  <th:block layout:fragment="<th:block layout:fragment="extraStyles" />" />
+</body>
+</html>

@@ -1,19 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout :: site-head"></head>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorate="~{_layouts/layout}">
+
+<head></head>
 <body>
-
-  <th:block th:replace="layout :: site-navbar"></th:block>
-
-  <div class="container">
+  <th:block layout:fragment="content">
     <div class="starter-template">
       <h1 th:text="#{sistema.titulo}"></h1>
       <p class="lead">Nossas dúvidas são traidoras e nos fazem perder o bem que poderíamos conquistar se não fosse o medo de errar. (William Shakespeare)</p>
     </div>
-
-    <th:block th:replace="layout :: site-footer"></th:block>
-  </div><!-- /container -->
-
-  <th:block th:replace="layout :: site-script"></th:block>
+  </th:block>
 </body>
 </html>
