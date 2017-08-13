@@ -6,7 +6,10 @@ import static org.apache.commons.lang3.StringUtils.trimToNull;
 import br.com.danielwisky.pibbaeta.models.PedidoOracao;
 import br.com.danielwisky.pibbaeta.repositories.PedidoOracaoRepository;
 import br.com.danielwisky.pibbaeta.services.PedidoOracaoService;
+import java.util.List;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +24,11 @@ public class PedidoOracaoServiceImpl implements PedidoOracaoService {
   public void adiciona(PedidoOracao pedidoOracao) {
     preparaParaSalvar(pedidoOracao);
     pedidoOracaoRepository.insert(pedidoOracao);
+  }
+
+  @Override
+  public List<PedidoOracao> lista() {
+    return pedidoOracaoRepository.findAll(new Sort(Direction.DESC, "data"));
   }
 
   private void preparaParaSalvar(PedidoOracao pedidoOracao) {

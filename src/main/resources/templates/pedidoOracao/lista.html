@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layouts/layout}">
+<head>
+  <th:block layout:fragment="extraStyles">
+    <link rel="stylesheet" th:href="@{/plugins/bootstrap-table/bootstrap-table.min.css}" />
+  </th:block>
+</head>
+<body>
+  <th:block layout:fragment="content">
+    <div class="page-header">
+      <h1 th:text="#{pedido.oracao}"></h1>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <table id="table"
+               data-toggle="table"
+               data-height="400"
+               data-pagination="true"
+               data-page-list="[5, 10, 20, 50]"
+               data-url="/pedido-oracao/pesquisa">
+          <thead>
+            <tr>
+              <th data-field="nome" data-sortable="true" th:text="#{nome}"></th>
+              <th data-field="email" data-sortable="true" th:text="#{email}"></th>
+              <th data-field="telefone" data-sortable="true" th:text="#{telefone}"></th>
+              <th data-field="pedido" data-sortable="true" th:text="#{pedido}"></th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+  </th:block>
+
+  <th:block layout:fragment="extraScripts">
+    <script th:src="@{/plugins/bootstrap-table/bootstrap-table.min.js}"></script>
+    <script th:src="@{/plugins/bootstrap-table/locale/bootstrap-table-pt-BR.js}"></script>
+  </th:block>
+</body>
+</html>

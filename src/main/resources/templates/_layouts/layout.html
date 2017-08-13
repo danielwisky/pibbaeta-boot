@@ -7,11 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title th:text="#{sistema.titulo}"></title>
 
-  <link rel="icon" href="images/favicon.ico" th:href="@{/images/favicon.ico}" />
-  <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}" />
-  <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css" th:href="@{/plugins/font-awesome/css/font-awesome.min.css}" />
+  <link rel="icon" th:href="@{/images/favicon.ico}" />
+  <link rel="stylesheet" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}" />
+  <link rel="stylesheet" th:href="@{/plugins/font-awesome/css/font-awesome.min.css}" />
   <th:block layout:fragment="extraStyles" />
-  <link rel="stylesheet" href="css/style.css" th:href="@{/css/style.css}" />
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -33,9 +33,9 @@
   </div><!-- /container -->
 
   <!-- Placed at the end of the document so the pages load faster -->
-  <script src="plugins/jquery/jquery.min.js" th:src="@{/plugins/jquery/jquery.min.js}"></script>
-  <script src="plugins/bootstrap/js/bootstrap.min.js" th:src="@{/plugins/bootstrap/js/bootstrap.min.js}"></script>
-  <script src="js/application.js" th:src="@{/js/application.js}"></script>
-  <th:block layout:fragment="<th:block layout:fragment="extraStyles" />" />
+  <script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+  <script th:src="@{/plugins/bootstrap/js/bootstrap.min.js}"></script>
+  <script th:src="@{/js/application.js}"></script>
+  <th:block layout:fragment="extraScripts" />
 </body>
 </html>
