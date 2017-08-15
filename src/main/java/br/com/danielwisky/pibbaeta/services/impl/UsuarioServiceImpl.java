@@ -1,5 +1,6 @@
 package br.com.danielwisky.pibbaeta.services.impl;
 
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 import br.com.danielwisky.pibbaeta.models.Usuario;
@@ -8,6 +9,8 @@ import br.com.danielwisky.pibbaeta.services.UsuarioService;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -59,5 +62,34 @@ public class UsuarioServiceImpl implements UsuarioService {
     user.setConfirmarSenha(usuario.getConfirmarSenha());
 
     return user;
+  }
+
+  @Override
+  public Usuario preparaParaAtualizarAutenticado(Usuario usuario) {
+
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    Usuario autenticado = (Usuario) authentication.getPrincipal();
+
+    autenticado.setNome(StringUtils.trim(usuario.getNome()));
+    autenticado.setEmail(StringUtils.trim(usuario.getEmail()));
+    autenticado.setLogin(StringUtils.trim(usuario.getLogin()));
+    autenticado.setConfirmarSenha(usuario.getConfirmarSenha());
+    autenticado.setNovaSenha(usuario.getNovaSenha());
+
+    return autenticado;
+  }
+
+  @Override
+  public boolean checaExisteLogin(String login, String id) {
+    return isBlank(id) ?
+        usuarioRepository.existsByLogin(login) :
+        usuarioRepository.existsByLoginAndIdNot(login, id);
+  }
+
+  @Override
+  public boolean checaExisteEmail(String email, String id) {
+    return isBlank(id) ?
+        usuarioRepository.existsByEmail(email) :
+        usuarioRepository.existsByEmailAndIdNot(email, id);
   }
 }

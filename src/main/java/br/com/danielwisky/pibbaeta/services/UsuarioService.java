@@ -14,4 +14,10 @@ public interface UsuarioService {
   Usuario busca(String id);
 
   Usuario preparaParaAtualizar(Usuario usuario, String id);
+
+  Usuario preparaParaAtualizarAutenticado(Usuario usuario);
+
+  boolean checaExisteLogin(String login, String id);
+
+  boolean checaExisteEmail(String email, String id);
 }

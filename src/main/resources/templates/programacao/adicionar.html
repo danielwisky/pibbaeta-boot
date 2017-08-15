@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layouts/layout}">
+<head>
+  <th:block layout:fragment="extraStyles">
+    <link rel="stylesheet"  th:href="@{/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css}" />
+  </th:block>
+</head>
+<body>
+<th:block layout:fragment="content">
+  <div class="page-header">
+    <h1><th:block th:text="#{adicionar}"/> <small th:text="#{programacao}"></small></h1>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-offset-2 col-lg-8">
+      <form th:action="@{/programacao}" th:object="${programacao}" th:method="post">
+        <th:block th:replace="programacao/form :: form" />
+      </form>
+    </div>
+  </div>
+</th:block>
+
+<th:block layout:fragment="extraScripts">
+  <script th:src="@{/plugins/moment/moment.min.js}"></script>
+  <script th:src="@{/plugins/moment/pt-br.js}"></script>
+  <script th:src="@{/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js}"></script>
+  <script>
+    $(function() {
+      $('.datetime').datetimepicker({
+        format: 'DD/MM/YYYY HH:mm',
+        locale: 'pt-br'
+      });
+    });
+  </script>
+</th:block>
+</body>
+</html>

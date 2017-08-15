@@ -11,9 +11,9 @@
 <th:block layout:fragment="content">
   <div class="page-header">
     <div class='pull-right'>
-      <a th:href="@{/usuario/adicionar}" class="btn btn-primary" th:text="#{adicionar}"></a>
+      <a th:href="@{/programacao/adicionar}" class="btn btn-primary" th:text="#{adicionar}"></a>
     </div>
-    <h1 th:text="#{usuario}"></h1>
+    <h1 th:text="#{programacao}"></h1>
   </div>
 
   <div class="row">
@@ -23,10 +23,14 @@
              data-height="400"
              data-pagination="true"
              data-page-list="[5, 10, 20, 50]"
-             data-url="/usuario/pesquisa">
+             data-url="/programacao/pesquisa">
         <thead>
           <tr>
-            <th data-field="nome" data-sortable="true" th:text="#{usuario}"></th>
+            <th data-field="titulo" data-sortable="true" th:text="#{titulo}"></th>
+            <th data-field="local" data-sortable="true" th:text="#{local}"></th>
+            <th data-field="dataInicio" data-formatter="dateFormat" data-sortable="true" th:text="#{data.inicio}"></th>
+            <th data-field="dataTermino" data-formatter="dateFormat" data-sortable="true" th:text="#{data.termino}"></th>
+            <th data-field="tipo.descricao" data-sortable="true" th:text="#{tipo}"></th>
             <th data-field="status" data-sortable="true" th:text="#{status}"></th>
             <th data-formatter="acaoFormat" th:text="#{acao}"></th>
           </tr>
@@ -40,6 +44,7 @@
 <th:block layout:fragment="extraScripts">
   <script th:src="@{/plugins/bootstrap-table/bootstrap-table.min.js}"></script>
   <script th:src="@{/plugins/bootstrap-table/locale/bootstrap-table-pt-BR.js}"></script>
+  <script th:src="@{/plugins/moment/moment.min.js}"></script>
   <script>
     $(document).ready(function() {
       var $table = $('#table');
@@ -48,8 +53,19 @@
       });
     });
 
+    function dateFormat(value, row, index) {
+      return moment(value).format('DD/MM/YYYY HH:MM');
+    }
+
     function acaoFormat(value, row, index) {
-      return "<a href='/usuario/" + row.id + "' data-toggle='tooltip' data-placement='left' title='Editar'><i class='glyphicon glyphicon-edit'></i></a>";
+      return "<a href='/programacao/" + row.id + "' data-toggle='tooltip' data-placement='left' title='Editar'><i class='glyphicon glyphicon-edit'></i></a>";
+    }
+
+    function queryParams() {
+        return {
+          titulo: $('#titulo').val(),
+          status: $('#status').val()
+        };
     }
   </script>
 </th:block>

@@ -50,7 +50,7 @@ public class UsuarioController {
     return "redirect:/usuario";
   }
 
-  @RequestMapping("/adiciona")
+  @RequestMapping("/adicionar")
   public String adiciona(Usuario usuario, Model model) {
     loadFormDependencies(model);
     return "usuario/adicionar";
@@ -92,10 +92,10 @@ public class UsuarioController {
     return usuarioService.lista();
   }
 
-  private Model loadFormDependencies(Model modelAndView) {
-    modelAndView.addAttribute("menu", "cadastro");
-    modelAndView.addAttribute("statuses", Status.values());
-    modelAndView.addAttribute("roles", Papel.values());
-    return modelAndView;
+  private Model loadFormDependencies(Model model) {
+    model.addAttribute("menu", "cadastro");
+    model.addAttribute("statuses", Status.values());
+    model.addAttribute("roles", Papel.values());
+    return model;
   }
 }

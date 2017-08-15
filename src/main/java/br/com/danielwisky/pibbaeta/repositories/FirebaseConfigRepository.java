@@ -6,5 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FirebaseConfigRepository extends MongoRepository<FirebaseConfig, String> {
-
+  
+  FirebaseConfig findByIdIsNotNull();
 }
