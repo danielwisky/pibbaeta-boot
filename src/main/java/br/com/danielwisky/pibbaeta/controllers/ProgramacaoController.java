@@ -4,21 +4,14 @@ import br.com.danielwisky.pibbaeta.models.Programacao;
 import br.com.danielwisky.pibbaeta.models.enums.Status;
 import br.com.danielwisky.pibbaeta.services.ProgramacaoService;
 import br.com.danielwisky.pibbaeta.services.TipoProgramacaoService;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,13 +26,6 @@ public class ProgramacaoController {
   private MessageSource messageSource;
   private ProgramacaoService programacaoService;
   private TipoProgramacaoService tipoProgramacaoService;
-
-  @InitBinder
-  public void initBinder(WebDataBinder binder) {
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-    dateFormat.setLenient(false);
-    binder.registerCustomEditor(LocalDateTime.class, new CustomDateEditor(dateFormat, true));
-  }
 
   @RequestMapping(method = RequestMethod.GET)
   public String lista(Model model) {

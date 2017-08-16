@@ -11,9 +11,44 @@
 <th:block layout:fragment="content">
   <div class="page-header">
     <div class='pull-right'>
-      <a th:href="@{/programacao/adicionar}" class="btn btn-primary" th:text="#{adicionar}"></a>
+      <a th:href="@{/programacao/adicionar}" class="btn btn-default" th:text="#{adicionar}"></a>
+      <button id="pesquisar" class="btn btn-primary" type="button" th:text="#{pesquisar}"></button>
     </div>
     <h1 th:text="#{programacao}"></h1>
+  </div>
+
+  <th:block th:if="${sucesso != null}">
+    <div class="alert-animate alert alert-success alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <th:block th:text="${sucesso}" />
+    </div>
+  </th:block>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading" th:text="#{filtros}"></div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="form-group">
+                <label for="titulo" class="control-label"><th:block th:text="#{titulo}"/>:</label>
+                <input id="titulo" name="titulo" class="form-control" />
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="form-group">
+                <label for="status" class="control-label"><th:block th:text="#{status}"/>:</label>
+                <select id="status" class="form-control">
+                  <option value="" th:text="#{todos}"></option>
+                  <option th:each="status : ${statuses}" th:value="${status}" th:text="${status}"></option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="row">
@@ -23,6 +58,7 @@
              data-height="400"
              data-pagination="true"
              data-page-list="[5, 10, 20, 50]"
+             data-query-params="queryParams"
              data-url="/programacao/pesquisa">
         <thead>
           <tr>
@@ -54,7 +90,7 @@
     });
 
     function dateFormat(value, row, index) {
-      return moment(value).format('DD/MM/YYYY HH:MM');
+      return moment(value).format('DD/MM/YYYY HH:mm');
     }
 
     function acaoFormat(value, row, index) {

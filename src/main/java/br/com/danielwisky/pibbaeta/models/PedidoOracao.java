@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -16,9 +17,11 @@ public class PedidoOracao implements Serializable {
 
   @Id
   private String id;
+  @NotBlank
   private String nome;
   private String email;
   private String telefone;
+  @NotBlank
   private String pedido;
   private LocalDateTime data;
 }

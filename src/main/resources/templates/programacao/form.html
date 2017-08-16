@@ -4,6 +4,76 @@
 <body>
 <th:block th:fragment="form">
   <div class="row">
+    <div class="col-lg-6">
+      <div class="form-group" th:classappend="${#fields.hasErrors('titulo')}? has-error">
+        <label th:for="titulo" class="control-label"><th:block th:text="#{titulo}" />:</label>
+        <input th:field="*{titulo}" class="form-control" />
+        <p th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}" class="help-block" />
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <div class="form-group" th:classappend="${#fields.hasErrors('tipo')}? has-error">
+        <label th:for="tipo" class="control-label"><th:block th:text="#{tipo}" />:</label>
+        <select th:field="*{tipo.id}" class="form-control">
+          <option th:each="tipo : ${tipos}" th:value="${tipo.id}" th:text="${tipo.descricao}"></option>
+        </select>
+        <p th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}" class="help-block" />
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <div class="form-group" th:classappend="${#fields.hasErrors('status')}? has-error">
+        <label th:for="status" class="control-label"><th:block th:text="#{status}" />:</label>
+        <select th:field="*{status}" class="form-control">
+          <option th:each="status : ${statuses}" th:value="${status}" th:text="${status}"></option>
+        </select>
+        <p th:if="${#fields.hasErrors('status')}" th:errors="*{status}" class="help-block" />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="form-group" th:classappend="${#fields.hasErrors('dataInicio')}? has-error">
+        <label th:for="dataInicio" class="control-label"><th:block th:text="#{data.inicio}" />:</label>
+        <input th:field="*{dataInicio}" class="form-control datetime" />
+        <p th:if="${#fields.hasErrors('dataInicio')}" th:errors="*{dataInicio}" class="help-block" />
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="form-group" th:classappend="${#fields.hasErrors('dataTermino')}? has-error">
+        <label th:for="dataTermino" class="control-label"><th:block th:text="#{data.termino}" />:</label>
+        <input th:field="*{dataTermino}" class="form-control datetime" />
+        <p th:if="${#fields.hasErrors('dataTermino')}" th:errors="*{dataTermino}" class="help-block" />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="form-group" th:classappend="${#fields.hasErrors('local')}? has-error">
+        <label th:for="local" class="control-label"><th:block th:text="#{local}" />:</label>
+        <input th:field="*{local}" class="form-control" />
+        <p th:if="${#fields.hasErrors('local')}" th:errors="*{local}" class="help-block" />
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="form-group" th:classappend="${#fields.hasErrors('endereco')}? has-error">
+        <label th:for="endereco" class="control-label"><th:block th:text="#{endereco}" />:</label>
+        <input th:field="*{endereco}" class="form-control" />
+        <p th:if="${#fields.hasErrors('endereco')}" th:errors="*{endereco}" class="help-block" />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="form-group" th:classappend="${#fields.hasErrors('descricao')}? has-error">
+        <label th:for="descricao" class="control-label"><th:block th:text="#{descricao}" />:</label>
+        <textarea th:field="*{descricao}" class="form-control" />
+        <p th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}" class="help-block" />
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
     <div class="col-lg-12">
       <button type="submit" class="btn btn-primary" th:text="#{salvar}" />
       <a class="btn btn-default" th:href="@{/programacao}" th:text="#{voltar}"></a>

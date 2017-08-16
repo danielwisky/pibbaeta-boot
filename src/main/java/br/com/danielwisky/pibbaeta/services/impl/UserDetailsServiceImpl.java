@@ -3,7 +3,6 @@ package br.com.danielwisky.pibbaeta.services.impl;
 import static java.util.Optional.ofNullable;
 
 import br.com.danielwisky.pibbaeta.repositories.UsuarioRepository;
-import br.com.danielwisky.pibbaeta.services.UsuarioService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

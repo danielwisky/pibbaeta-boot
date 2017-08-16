@@ -22,4 +22,19 @@ db.usuario.insert({
         "ROLE_USER"
     ]
 });
+
+db.tipoProgramacao.insert({
+    "_class": "br.com.danielwisky.pibbaeta.models.TipoProgramacao",
+    "descricao": "Culto"
+});
+
+db.tipoProgramacao.insert({
+    "_class": "br.com.danielwisky.pibbaeta.models.TipoProgramacao",
+    "descricao": "Evento"
+});
+
+db.tipoProgramacao.insert({
+    "_class": "br.com.danielwisky.pibbaeta.models.TipoProgramacao",
+    "descricao": "PG"
+});
 ```

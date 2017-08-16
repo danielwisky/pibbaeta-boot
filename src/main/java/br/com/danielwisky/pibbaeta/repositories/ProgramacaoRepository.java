@@ -9,5 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProgramacaoRepository extends MongoRepository<Programacao, String> {
 
-  List<Programacao> findByTituloAndStatus(String titulo, Status status);
+  List<Programacao> findByTituloLike(String titulo);
+
+  List<Programacao> findByTituloLikeAndStatus(String titulo, Status status);
 }

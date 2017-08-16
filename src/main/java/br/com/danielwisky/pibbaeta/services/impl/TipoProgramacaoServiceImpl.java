@@ -5,6 +5,8 @@ import br.com.danielwisky.pibbaeta.repositories.TipoProgramacaoRepository;
 import br.com.danielwisky.pibbaeta.services.TipoProgramacaoService;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,6 +17,6 @@ public class TipoProgramacaoServiceImpl implements TipoProgramacaoService {
 
   @Override
   public List<TipoProgramacao> lista() {
-    return tipoProgramacaoRepository.findAll();
+    return tipoProgramacaoRepository.findAll(new Sort(Direction.ASC, "descricao"));
   }
 }

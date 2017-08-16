@@ -3,6 +3,7 @@ package br.com.danielwisky.pibbaeta.models;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -15,5 +16,6 @@ public class TipoProgramacao implements Serializable {
 
   @Id
   private String id;
+  @NotBlank
   private String descricao;
 }
