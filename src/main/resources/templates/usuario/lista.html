@@ -2,56 +2,63 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{_layouts/layout}">
-<head>
+<head></head>
+<body>
   <th:block layout:fragment="extraStyles">
     <link rel="stylesheet" th:href="@{/plugins/bootstrap-table/bootstrap-table.min.css}" />
   </th:block>
-</head>
-<body>
-<th:block layout:fragment="content">
-  <div class="page-header">
-    <div class='pull-right'>
-      <a th:href="@{/usuario/adicionar}" class="btn btn-primary" th:text="#{adicionar}"></a>
+
+  <th:block layout:fragment="content">
+    <div class="page-header">
+      <div class='pull-right'>
+        <a th:href="@{/usuario/adicionar}" class="btn btn-primary" th:text="#{adicionar}"></a>
+      </div>
+      <h1 th:text="#{usuario}"></h1>
     </div>
-    <h1 th:text="#{usuario}"></h1>
-  </div>
 
-  <div class="row">
-    <div class="col-xs-12">
-      <table id="table"
-             data-toggle="table"
-             data-height="400"
-             data-pagination="true"
-             data-page-list="[5, 10, 20, 50]"
-             data-url="/usuario/pesquisa">
-        <thead>
-          <tr>
-            <th data-field="nome" data-sortable="true" th:text="#{usuario}"></th>
-            <th data-field="status" data-sortable="true" th:text="#{status}"></th>
-            <th data-formatter="acaoFormat" th:text="#{acao}"></th>
-          </tr>
-        </thead>
-      </table>
+    <th:block th:if="${sucesso != null}">
+      <div class="alert-animate alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <th:block th:text="${sucesso}" />
+      </div>
+    </th:block>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <table id="table"
+               data-toggle="table"
+               data-height="400"
+               data-pagination="true"
+               data-page-list="[5, 10, 20, 50]"
+               data-url="/usuario/pesquisa">
+          <thead>
+            <tr>
+              <th data-field="nome" data-sortable="true" th:text="#{usuario}"></th>
+              <th data-field="status" data-sortable="true" th:text="#{status}"></th>
+              <th data-formatter="acaoFormat" th:text="#{acao}"></th>
+            </tr>
+          </thead>
+        </table>
+      </div>
     </div>
-  </div>
 
-</th:block>
+  </th:block>
 
-<th:block layout:fragment="extraScripts">
-  <script th:src="@{/plugins/bootstrap-table/bootstrap-table.min.js}"></script>
-  <script th:src="@{/plugins/bootstrap-table/locale/bootstrap-table-pt-BR.js}"></script>
-  <script>
-    $(document).ready(function() {
-      var $table = $('#table');
-      $('#pesquisar').click(function () {
-        $table.bootstrapTable('refresh');
+  <th:block layout:fragment="extraScripts">
+    <script th:src="@{/plugins/bootstrap-table/bootstrap-table.min.js}"></script>
+    <script th:src="@{/plugins/bootstrap-table/locale/bootstrap-table-pt-BR.js}"></script>
+    <script>
+      $(document).ready(function() {
+        var $table = $('#table');
+        $('#pesquisar').click(function () {
+          $table.bootstrapTable('refresh');
+        });
       });
-    });
 
-    function acaoFormat(value, row, index) {
-      return "<a href='/usuario/" + row.id + "' data-toggle='tooltip' data-placement='left' title='Editar'><i class='glyphicon glyphicon-edit'></i></a>";
-    }
-  </script>
-</th:block>
+      function acaoFormat(value, row, index) {
+        return "<a href='/usuario/" + row.id + "' data-toggle='tooltip' data-placement='left' title='Editar'><i class='glyphicon glyphicon-edit'></i></a>";
+      }
+    </script>
+  </th:block>
 </body>
 </html>

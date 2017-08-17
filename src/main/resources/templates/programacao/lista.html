@@ -2,108 +2,107 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{_layouts/layout}">
-<head>
+<head></head>
+<body>
   <th:block layout:fragment="extraStyles">
     <link rel="stylesheet" th:href="@{/plugins/bootstrap-table/bootstrap-table.min.css}" />
   </th:block>
-</head>
-<body>
-<th:block layout:fragment="content">
-  <div class="page-header">
-    <div class='pull-right'>
-      <a th:href="@{/programacao/adicionar}" class="btn btn-default" th:text="#{adicionar}"></a>
-      <button id="pesquisar" class="btn btn-primary" type="button" th:text="#{pesquisar}"></button>
+  <th:block layout:fragment="content">
+    <div class="page-header">
+      <div class='pull-right'>
+        <a th:href="@{/programacao/adicionar}" class="btn btn-default" th:text="#{adicionar}"></a>
+        <button id="pesquisar" class="btn btn-primary" type="button" th:text="#{pesquisar}"></button>
+      </div>
+      <h1 th:text="#{programacao}"></h1>
     </div>
-    <h1 th:text="#{programacao}"></h1>
-  </div>
 
-  <th:block th:if="${sucesso != null}">
-    <div class="alert-animate alert alert-success alert-dismissible" role="alert">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      <th:block th:text="${sucesso}" />
-    </div>
-  </th:block>
+    <th:block th:if="${sucesso != null}">
+      <div class="alert-animate alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <th:block th:text="${sucesso}" />
+      </div>
+    </th:block>
 
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="panel panel-default">
-        <div class="panel-heading" th:text="#{filtros}"></div>
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-lg-3">
-              <div class="form-group">
-                <label for="titulo" class="control-label"><th:block th:text="#{titulo}"/>:</label>
-                <input id="titulo" name="titulo" class="form-control" />
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-heading" th:text="#{filtros}"></div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label for="titulo" class="control-label"><th:block th:text="#{titulo}"/>:</label>
+                  <input id="titulo" name="titulo" class="form-control" />
+                </div>
               </div>
-            </div>
-            <div class="col-lg-3">
-              <div class="form-group">
-                <label for="status" class="control-label"><th:block th:text="#{status}"/>:</label>
-                <select id="status" class="form-control">
-                  <option value="" th:text="#{todos}"></option>
-                  <option th:each="status : ${statuses}" th:value="${status}" th:text="${status}"></option>
-                </select>
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label for="status" class="control-label"><th:block th:text="#{status}"/>:</label>
+                  <select id="status" class="form-control">
+                    <option value="" th:text="#{todos}"></option>
+                    <option th:each="status : ${statuses}" th:value="${status}" th:text="${status}"></option>
+                  </select>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-xs-12">
-      <table id="table"
-             data-toggle="table"
-             data-height="400"
-             data-pagination="true"
-             data-page-list="[5, 10, 20, 50]"
-             data-query-params="queryParams"
-             data-url="/programacao/pesquisa">
-        <thead>
-          <tr>
-            <th data-field="titulo" data-sortable="true" th:text="#{titulo}"></th>
-            <th data-field="local" data-sortable="true" th:text="#{local}"></th>
-            <th data-field="dataInicio" data-formatter="dateFormat" data-sortable="true" th:text="#{data.inicio}"></th>
-            <th data-field="dataTermino" data-formatter="dateFormat" data-sortable="true" th:text="#{data.termino}"></th>
-            <th data-field="tipo.descricao" data-sortable="true" th:text="#{tipo}"></th>
-            <th data-field="status" data-sortable="true" th:text="#{status}"></th>
-            <th data-formatter="acaoFormat" th:text="#{acao}"></th>
-          </tr>
-        </thead>
-      </table>
+    <div class="row">
+      <div class="col-xs-12">
+        <table id="table"
+               data-toggle="table"
+               data-height="400"
+               data-pagination="true"
+               data-page-list="[5, 10, 20, 50]"
+               data-query-params="queryParams"
+               data-url="/programacao/pesquisa">
+          <thead>
+            <tr>
+              <th data-field="titulo" data-sortable="true" th:text="#{titulo}"></th>
+              <th data-field="local" data-sortable="true" th:text="#{local}"></th>
+              <th data-field="dataInicio" data-formatter="dateFormat" data-sortable="true" th:text="#{data.inicio}"></th>
+              <th data-field="dataTermino" data-formatter="dateFormat" data-sortable="true" th:text="#{data.termino}"></th>
+              <th data-field="tipo.descricao" data-sortable="true" th:text="#{tipo}"></th>
+              <th data-field="status" data-sortable="true" th:text="#{status}"></th>
+              <th data-formatter="acaoFormat" th:text="#{acao}"></th>
+            </tr>
+          </thead>
+        </table>
+      </div>
     </div>
-  </div>
 
-</th:block>
+  </th:block>
 
-<th:block layout:fragment="extraScripts">
-  <script th:src="@{/plugins/bootstrap-table/bootstrap-table.min.js}"></script>
-  <script th:src="@{/plugins/bootstrap-table/locale/bootstrap-table-pt-BR.js}"></script>
-  <script th:src="@{/plugins/moment/moment.min.js}"></script>
-  <script>
-    $(document).ready(function() {
-      var $table = $('#table');
-      $('#pesquisar').click(function () {
-        $table.bootstrapTable('refresh');
+  <th:block layout:fragment="extraScripts">
+    <script th:src="@{/plugins/bootstrap-table/bootstrap-table.min.js}"></script>
+    <script th:src="@{/plugins/bootstrap-table/locale/bootstrap-table-pt-BR.js}"></script>
+    <script th:src="@{/plugins/moment/moment.min.js}"></script>
+    <script>
+      $(document).ready(function() {
+        var $table = $('#table');
+        $('#pesquisar').click(function () {
+          $table.bootstrapTable('refresh');
+        });
       });
-    });
 
-    function dateFormat(value, row, index) {
-      return moment(value).format('DD/MM/YYYY HH:mm');
-    }
+      function dateFormat(value, row, index) {
+        return moment(value).format('DD/MM/YYYY HH:mm');
+      }
 
-    function acaoFormat(value, row, index) {
-      return "<a href='/programacao/" + row.id + "' data-toggle='tooltip' data-placement='left' title='Editar'><i class='glyphicon glyphicon-edit'></i></a>";
-    }
+      function acaoFormat(value, row, index) {
+        return "<a href='/programacao/" + row.id + "' data-toggle='tooltip' data-placement='left' title='Editar'><i class='glyphicon glyphicon-edit'></i></a>";
+      }
 
-    function queryParams() {
-        return {
-          titulo: $('#titulo').val(),
-          status: $('#status').val()
-        };
-    }
-  </script>
-</th:block>
+      function queryParams() {
+          return {
+            titulo: $('#titulo').val(),
+            status: $('#status').val()
+          };
+      }
+    </script>
+  </th:block>
 </body>
 </html>

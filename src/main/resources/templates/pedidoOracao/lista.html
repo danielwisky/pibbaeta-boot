@@ -2,12 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{_layouts/layout}">
-<head>
+<head></head>
+<body>
   <th:block layout:fragment="extraStyles">
     <link rel="stylesheet" th:href="@{/plugins/bootstrap-table/bootstrap-table.min.css}" />
   </th:block>
-</head>
-<body>
   <th:block layout:fragment="content">
     <div class="page-header">
       <h1 th:text="#{pedido.oracao}"></h1>
