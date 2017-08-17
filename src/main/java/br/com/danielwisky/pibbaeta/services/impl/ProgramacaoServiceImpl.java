@@ -22,7 +22,6 @@ import org.springframework.stereotype.Service;
 public class ProgramacaoServiceImpl implements ProgramacaoService {
 
   private ProgramacaoRepository programacaoRepository;
-  private TipoProgramacaoRepository tipoProgramacaoRepository;
 
   @Override
   public AgendaResponse getAgendaResponse() {
@@ -60,11 +59,7 @@ public class ProgramacaoServiceImpl implements ProgramacaoService {
     programacaoParaSalvar.setEndereco(trimToNull(programacao.getEndereco()));
     programacaoParaSalvar.setTitulo(trimToNull(programacao.getTitulo()));
     programacaoParaSalvar.setStatus(programacao.getStatus());
+    programacaoParaSalvar.setTipo(programacao.getTipo());
     programacaoParaSalvar.setDataAtualizacao(LocalDateTime.now());
-
-    if (nonNull(programacao.getTipo()) && isNotBlank(programacao.getTipo().getId())) {
-      TipoProgramacao tipo = tipoProgramacaoRepository.findOne(programacao.getTipo().getId());
-      programacaoParaSalvar.setTipo(tipo);
-    }
   }
 }

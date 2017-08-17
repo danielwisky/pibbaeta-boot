@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layouts/layout}">
+<head></head>
+<body>
+<th:block layout:fragment="content">
+  <div class="page-header">
+    <h1 th:text="#{configuracao}"></h1>
+  </div>
+
+  <th:block th:if="${sucesso != null}">
+    <div class="alert-animate alert alert-success alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <th:block th:text="${sucesso}" />
+    </div>
+  </th:block>
+
+  <div class="row">
+    <div class="col-lg-offset-2 col-lg-8">
+      <form th:action="@{/configuracao}" th:object="${usuario}" th:method="post">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="form-group" th:classappend="${#fields.hasErrors('nome')}? has-error">
+              <label th:for="nome" class="control-label"><th:block th:text="#{nome}" />:</label>
+              <input th:field="*{nome}" class="form-control" />
+              <p th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="help-block" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group" th:classappend="${#fields.hasErrors('email')}? has-error">
+              <label th:for="email" class="control-label"><th:block th:text="#{email}" />:</label>
+              <input th:field="*{email}" class="form-control"/>
+              <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="help-block" />
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group" th:classappend="${#fields.hasErrors('login')}? has-error">
+              <label th:for="login" class="control-label"><th:block th:text="#{usuario}" />:</label>
+              <input th:field="*{login}" class="form-control" />
+              <p th:if="${#fields.hasErrors('login')}" th:errors="*{login}" class="help-block" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group" th:classappend="${#fields.hasErrors('novaSenha')}? has-error">
+              <label th:for="novaSenha" class="control-label"><th:block th:text="#{nova.senha}" />:</label>
+              <input th:field="*{novaSenha}" type='password' class="form-control" />
+              <p th:if="${#fields.hasErrors('novaSenha')}" th:errors="*{novaSenha}" class="help-block" />
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group" th:classappend="${#fields.hasErrors('confirmarSenha')}? has-error">
+              <label th:for="confirmarSenha" class="control-label"><th:block th:text="#{confirmar.senha}" />:</label>
+              <input th:field="*{confirmarSenha}" type='password' class="form-control" />
+              <p th:if="${#fields.hasErrors('confirmarSenha')}" th:errors="*{confirmarSenha}" class="help-block" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <button class="btn btn-primary" th:text="#{salvar}"></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</th:block>
+</body>
+</html>

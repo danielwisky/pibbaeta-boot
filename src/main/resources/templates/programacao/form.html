@@ -14,8 +14,8 @@
     <div class="col-lg-3">
       <div class="form-group" th:classappend="${#fields.hasErrors('tipo')}? has-error">
         <label th:for="tipo" class="control-label"><th:block th:text="#{tipo}" />:</label>
-        <select th:field="*{tipo.id}" class="form-control">
-          <option th:each="tipo : ${tipos}" th:value="${tipo.id}" th:text="${tipo.descricao}"></option>
+        <select th:field="*{tipo.descricao}" class="form-control">
+          <option th:each="tipo : ${tipos}" th:value="${tipo.descricao}" th:text="${tipo.descricao}"></option>
         </select>
         <p th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}" class="help-block" />
       </div>

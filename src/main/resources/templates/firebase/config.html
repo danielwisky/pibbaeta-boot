@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layouts/layout}">
+<head></head>
+<body>
+<th:block layout:fragment="content">
+  <div class="page-header">
+    <h1 th:text="#{firebase}"></h1>
+  </div>
+
+  <th:block th:if="${sucesso != null}">
+    <div class="alert-animate alert alert-success alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <th:block th:text="${sucesso}" />
+    </div>
+  </th:block>
+  <th:block th:if="${falha != null}">
+    <div class="alert-animate alert alert-danger alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <th:block th:text="${falha}" />
+    </div>
+  </th:block>
+
+  <div class="row">
+    <div class="col-lg-offset-2 col-lg-8">
+      <form th:action="@{/firebase}" th:object="${firebaseConfig}" th:method="post">
+        <input th:field="*{id}" type="hidden" />
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="form-group" th:classappend="${#fields.hasErrors('url')}? has-error">
+              <label th:for="url" class="control-label"><th:block th:text="#{url}" />:</label>
+              <input th:field="*{url}" class="form-control" />
+              <p th:if="${#fields.hasErrors('url')}" th:errors="*{url}" class="help-block" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="form-group" th:classappend="${#fields.hasErrors('apikey')}? has-error">
+              <label th:for="apikey" class="control-label"><th:block th:text="#{chave}" />:</label>
+              <input th:field="*{apikey}" class="form-control" />
+              <p th:if="${#fields.hasErrors('apikey')}" th:errors="*{apikey}" class="help-block" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <button class="btn btn-primary" th:text="#{salvar}"></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</th:block>
+</body>
+</html>

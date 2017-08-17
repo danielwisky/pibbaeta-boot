@@ -36,7 +36,7 @@ public class Programacao implements Serializable {
   private String endereco;
   private String urlBanner;
   @NotNull
-  private TipoProgramacao tipo;
+  private Tipo tipo;
   @LastModifiedDate
   private LocalDateTime dataAtualizacao;
   @NotNull
