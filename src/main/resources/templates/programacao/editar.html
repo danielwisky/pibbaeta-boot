@@ -15,7 +15,6 @@
     <div class="row">
       <div class="col-lg-offset-2 col-lg-8">
         <form th:action="@{/programacao/} + ${id}" th:object="${programacao}" th:method="post">
-          <input th:field="*{id}" type="hidden" />
           <th:block th:replace="programacao/form :: form" />
         </form>
       </div>
