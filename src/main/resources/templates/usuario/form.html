@@ -6,15 +6,17 @@
   <div class="row">
     <div class="col-lg-8">
       <div class="form-group" th:class="${#fields.hasErrors('nome')}? has-error">
-        <label for="nome" class="control-label"><th:block th:text="#{nome}" />:</label>
+        <label th:for="nome" class="control-label"><th:block th:text="#{nome}" />:</label>
         <input th:field="*{nome}" class="form-control" placeholder="Nome" />
         <p th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="help-block" />
       </div>
     </div>
     <div class="col-lg-4">
       <div class="form-group" th:class="${#fields.hasErrors('status')}? has-error">
-        <label for="status" class="control-label"><th:block th:text="#{status}" />:</label>
-        <select th:field="" items="${statuses}" class="form-control" />
+        <label th:for="status" class="control-label"><th:block th:text="#{status}" />:</label>
+        <select th:field="*{status}" class="form-control">
+          <option th:each="status : ${statuses}" th:value="${status}" th:text="${status}"></option>
+        </select>
         <p th:if="${#fields.hasErrors('status')}" th:errors="*{status}" class="help-block" />
       </div>
     </div>
@@ -22,14 +24,14 @@
   <div class="row">
     <div class="col-lg-6">
         <div class="form-group" th:class="${#fields.hasErrors('email')}? has-error">
-          <label for="email" class="control-label"><th:block th:text="#{email}" />:</label>
+          <label th:for="email" class="control-label"><th:block th:text="#{email}" />:</label>
           <input th:field="*{email}" class="form-control" placeholder="E-mail" />
           <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="help-block" />
         </div>
     </div>
     <div class="col-lg-6">
         <div class="form-group" th:class="${#fields.hasErrors('login')}? has-error">
-          <label for="login" class="control-label"><th:block th:text="#{usuario}" />:</label>
+          <label th:for="login" class="control-label"><th:block th:text="#{usuario}" />:</label>
           <input th:field="*{login}" class="form-control" placeholder="Usuário" />
           <p th:if="${#fields.hasErrors('login')}" th:errors="*{login}" class="help-block" />
         </div>
@@ -37,16 +39,16 @@
   </div>
   <div class="row">
     <div class="col-lg-6">
-      <th:block th:if="${empty id}">
+      <th:block th:if="${id == null}">
           <div class="form-group" th:class="${#fields.hasErrors('senha')}? has-error">
-            <label for="senha" class="control-label"><th:block th:text="#{senha}" />:</label>
+            <label th:for="senha" class="control-label"><th:block th:text="#{senha}" />:</label>
             <input th:field="*{senha}" type='password' class="form-control" />
             <p th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}" class="help-block" />
           </div>
       </th:block>
-      <th:block th:if="${not empty id}">
+      <th:block th:if="${id != null}">
           <div class="form-group" th:class="${#fields.hasErrors('novaSenha')}? has-error">
-            <label for="novaSenha" class="control-label"><th:block th:text="#{nova.senha}" />:</label>
+            <label th:for="novaSenha" class="control-label"><th:block th:text="#{nova.senha}" />:</label>
             <input th:field="*{novaSenha}" type='password' class="form-control" />
             <p th:if="${#fields.hasErrors('novaSenha')}" th:errors="*{novaSenha}" class="help-block" />
           </div>
@@ -54,7 +56,7 @@
     </div>
     <div class="col-lg-6">
         <div class="form-group" th:class="${#fields.hasErrors('confirmarSenha')}? has-error">
-          <label for="confirmarSenha" class="control-label"><th:block th:text="#{confirmar.senha}" />:</label>
+          <label th:for="confirmarSenha" class="control-label"><th:block th:text="#{confirmar.senha}" />:</label>
           <input th:field="*{confirmarSenha}" type='password' class="form-control" />
           <p th:if="${#fields.hasErrors('confirmarSenha')}" th:errors="*{confirmarSenha}" class="help-block" />
         </div>
@@ -62,12 +64,12 @@
   </div>
   <div class="row">
     <div class="col-lg-12">
-        <div class="form-group" th:class="${#fields.hasErrors('roles')}? has-error">
-          <label for="roles" class="control-label"><th:block th:text="#{papeis}" />:</label>
-          <form:select path="roles" multiple="true" cssClass="select2 form-control">
-            <form:options items="${roles}" itemValue="id" itemLabel="descricao" />
-          </form:select>
-          <p th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}" class="help-block" />
+        <div class="form-group" th:class="${#fields.hasErrors('papeis')}? has-error">
+          <label th:for="papeis" class="control-label"><th:block th:text="#{papeis}" />:</label>
+          <select th:field="*{papeis}" multiple class="select2 form-control">
+            <option th:each="papel : ${papeis}" th:value="${papel}" th:text="${papel}"></option>
+          </select>
+          <p th:if="${#fields.hasErrors('papeis')}" th:errors="*{papeis}" class="help-block" />
         </div>
     </div>
   </div>

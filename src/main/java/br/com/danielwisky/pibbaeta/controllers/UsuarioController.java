@@ -95,7 +95,7 @@ public class UsuarioController {
   private Model loadFormDependencies(Model model) {
     model.addAttribute("menu", "cadastro");
     model.addAttribute("statuses", Status.values());
-    model.addAttribute("roles", Papel.values());
+    model.addAttribute("papeis", Papel.values());
     return model;
   }
 }
