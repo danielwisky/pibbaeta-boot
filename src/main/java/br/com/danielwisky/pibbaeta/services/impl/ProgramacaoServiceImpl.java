@@ -20,12 +20,6 @@ public class ProgramacaoServiceImpl implements ProgramacaoService {
   private ProgramacaoRepository programacaoRepository;
 
   @Override
-  public AgendaResponse getAgendaResponse() {
-    List<Programacao> programacoes = programacaoRepository.findAll();
-    return new AgendaResponse(programacoes);
-  }
-
-  @Override
   public void adiciona(Programacao programacao) {
     preparaParaSalvar(programacao, programacao);
     programacaoRepository.insert(programacao);
@@ -47,6 +41,11 @@ public class ProgramacaoServiceImpl implements ProgramacaoService {
     return ofNullable(status)
         .map(s -> programacaoRepository.findByTituloLikeAndStatusOrderByDataTerminoDesc(titulo, s))
         .orElse(programacaoRepository.findByTituloLikeOrderByDataTerminoDesc(titulo));
+  }
+
+  @Override
+  public List<Programacao> pesquisa(LocalDateTime versao) {
+    return programacaoRepository.findAll();
   }
 
   private void preparaParaSalvar(Programacao programacao, Programacao programacaoParaSalvar) {
