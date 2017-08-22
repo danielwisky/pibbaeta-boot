@@ -8,11 +8,11 @@ import lombok.Getter;
 @Getter
 public class AgendaResponse {
 
-  private List<Programacao> programacoes;
+  private List<ProgramacaoResponse> programacoes;
   private LocalDateTime dataAtualizacao;
 
   public AgendaResponse(List<Programacao> programacoes) {
-    this.programacoes = programacoes;
+    this.programacoes = ProgramacaoResponse.toList(programacoes);
     this.dataAtualizacao = LocalDateTime.now();
   }
 }

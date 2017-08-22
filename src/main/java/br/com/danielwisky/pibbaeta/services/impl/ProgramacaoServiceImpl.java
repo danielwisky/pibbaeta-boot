@@ -3,7 +3,6 @@ package br.com.danielwisky.pibbaeta.services.impl;
 import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.trimToNull;
 
-import br.com.danielwisky.pibbaeta.api.v1.resources.response.AgendaResponse;
 import br.com.danielwisky.pibbaeta.models.Programacao;
 import br.com.danielwisky.pibbaeta.models.enums.Status;
 import br.com.danielwisky.pibbaeta.repositories.ProgramacaoRepository;

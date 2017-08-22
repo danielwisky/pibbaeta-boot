@@ -15,7 +15,7 @@ public class PedidoOracaoRequest {
   private String pedido;
 
   public PedidoOracao toModel() {
-    PedidoOracao pedidoOracao = new PedidoOracao();
+    final PedidoOracao pedidoOracao = new PedidoOracao();
     pedidoOracao.setNome(getNome());
     pedidoOracao.setEmail(getEmail());
     pedidoOracao.setTelefone(getTelefone());
