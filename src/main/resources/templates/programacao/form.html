@@ -64,6 +64,15 @@
   </div>
   <div class="row">
     <div class="col-lg-12">
+      <div class="form-group" th:classappend="${#fields.hasErrors('urlBanner')}? has-error">
+        <label th:for="urlBanner" class="control-label"><th:block th:text="#{url.banner}" />:</label>
+        <input th:field="*{urlBanner}" class="form-control" />
+        <p th:if="${#fields.hasErrors('urlBanner')}" th:errors="*{urlBanner}" class="help-block" />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
       <div class="form-group" th:classappend="${#fields.hasErrors('descricao')}? has-error">
         <label th:for="descricao" class="control-label"><th:block th:text="#{descricao}" />:</label>
         <textarea th:field="*{descricao}" class="form-control" />
@@ -71,7 +80,15 @@
       </div>
     </div>
   </div>
-
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="form-group" th:classappend="${#fields.hasErrors('observacao')}? has-error">
+        <label th:for="observacao" class="control-label"><th:block th:text="#{observacao}" />:</label>
+        <textarea th:field="*{observacao}" class="form-control" />
+        <p th:if="${#fields.hasErrors('observacao')}" th:errors="*{observacao}" class="help-block" />
+      </div>
+    </div>
+  </div>
 
   <div class="row">
     <div class="col-lg-12">

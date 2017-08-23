@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,8 +24,7 @@ public class ProgramacaoRestController {
   @RequestMapping(method = RequestMethod.GET)
   public @ResponseBody
   AgendaResponse lista(
-      @RequestParam(name = "versao", required = false)
-      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime versao) {
+      @RequestParam(name = "versao", required = false) @DateTimeFormat(iso = ISO.DATE_TIME) LocalDateTime versao) {
     List<Programacao> programacoes = programacaoService.pesquisa(versao);
     return new AgendaResponse(programacoes);
   }

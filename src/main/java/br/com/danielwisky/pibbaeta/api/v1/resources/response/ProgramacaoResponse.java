@@ -20,6 +20,7 @@ public class ProgramacaoResponse {
   private String endereco;
   private String urlBanner;
   private TipoResponse tipo;
+  private String observacao;
   private String status;
 
   public ProgramacaoResponse(Programacao programacao) {
@@ -31,6 +32,7 @@ public class ProgramacaoResponse {
     this.local = programacao.getLocal();
     this.endereco = programacao.getEndereco();
     this.urlBanner = programacao.getUrlBanner();
+    this.observacao = programacao.getObservacao();
 
     if (nonNull(programacao.getTipo())) {
       this.tipo = new TipoResponse(programacao.getTipo());

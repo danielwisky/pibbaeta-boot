@@ -37,7 +37,7 @@ public class Programacao implements Serializable {
   private String urlBanner;
   @NotNull
   private Tipo tipo;
-  @LastModifiedDate
+  private String observacao;
   private LocalDateTime dataAtualizacao;
   @NotNull
   private Status status = Status.ATIVO;

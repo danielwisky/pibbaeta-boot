@@ -6,6 +6,7 @@ import static org.apache.commons.lang3.StringUtils.trimToNull;
 import br.com.danielwisky.pibbaeta.models.Programacao;
 import br.com.danielwisky.pibbaeta.models.enums.Status;
 import br.com.danielwisky.pibbaeta.repositories.ProgramacaoRepository;
+import br.com.danielwisky.pibbaeta.services.DispositivoService;
 import br.com.danielwisky.pibbaeta.services.ProgramacaoService;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,11 +18,13 @@ import org.springframework.stereotype.Service;
 public class ProgramacaoServiceImpl implements ProgramacaoService {
 
   private ProgramacaoRepository programacaoRepository;
+  private DispositivoService dispositivoService;
 
   @Override
   public void adiciona(Programacao programacao) {
     preparaParaSalvar(programacao, programacao);
     programacaoRepository.insert(programacao);
+    dispositivoService.enviaNotificacao(programacao);
   }
 
   @Override
@@ -29,6 +32,7 @@ public class ProgramacaoServiceImpl implements ProgramacaoService {
     Programacao programacaoParaAtualizar = programacaoRepository.findOne(id);
     preparaParaSalvar(programacao, programacaoParaAtualizar);
     programacaoRepository.save(programacaoParaAtualizar);
+    dispositivoService.enviaNotificacao(programacaoParaAtualizar);
   }
 
   @Override
@@ -44,7 +48,9 @@ public class ProgramacaoServiceImpl implements ProgramacaoService {
 
   @Override
   public List<Programacao> pesquisa(LocalDateTime versao) {
-    return programacaoRepository.findAll();
+    return ofNullable(versao)
+        .map(data -> programacaoRepository.findByDataAtualizacaoAfter(data))
+        .orElse(programacaoRepository.findByStatus(Status.ATIVO));
   }
 
   private void preparaParaSalvar(Programacao programacao, Programacao programacaoParaSalvar) {

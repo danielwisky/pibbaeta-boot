@@ -1,6 +1,7 @@
 package br.com.danielwisky.pibbaeta.services.impl;
 
 import br.com.danielwisky.pibbaeta.models.Dispositivo;
+import br.com.danielwisky.pibbaeta.models.Programacao;
 import br.com.danielwisky.pibbaeta.repositories.DispositivoRepository;
 import br.com.danielwisky.pibbaeta.services.DispositivoService;
 import java.util.List;
@@ -23,5 +24,12 @@ public class DispositivoServiceImpl implements DispositivoService {
   @Override
   public List<Dispositivo> lista() {
     return dispositivoRepository.findAll();
+  }
+
+  @Async
+  @Override
+  public void enviaNotificacao(Programacao programacao) {
+
+
   }
 }
