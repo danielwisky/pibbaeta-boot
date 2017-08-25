@@ -18,7 +18,7 @@ public class PedidoOracaoController {
   private PedidoOracaoService pedidoOracaoService;
 
   @RequestMapping(method = RequestMethod.GET)
-  public String lista(Model model) {
+  public String lista(final Model model) {
     model.addAttribute("menu", "pedidoOracao");
     return "pedidoOracao/lista";
   }

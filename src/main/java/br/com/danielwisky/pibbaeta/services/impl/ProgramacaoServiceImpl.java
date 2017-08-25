@@ -1,6 +1,6 @@
 package br.com.danielwisky.pibbaeta.services.impl;
 
-import static java.util.Optional.ofNullable;
+import static java.util.Objects.nonNull;
 import static org.apache.commons.lang3.StringUtils.trimToNull;
 
 import br.com.danielwisky.pibbaeta.models.Programacao;
@@ -21,14 +21,14 @@ public class ProgramacaoServiceImpl implements ProgramacaoService {
   private DispositivoService dispositivoService;
 
   @Override
-  public void adiciona(Programacao programacao) {
+  public void adiciona(final Programacao programacao) {
     preparaParaSalvar(programacao, programacao);
     programacaoRepository.insert(programacao);
     dispositivoService.enviaNotificacao(programacao);
   }
 
   @Override
-  public void altera(Programacao programacao, String id) {
+  public void altera(final Programacao programacao, final String id) {
     Programacao programacaoParaAtualizar = programacaoRepository.findOne(id);
     preparaParaSalvar(programacao, programacaoParaAtualizar);
     programacaoRepository.save(programacaoParaAtualizar);
@@ -36,24 +36,24 @@ public class ProgramacaoServiceImpl implements ProgramacaoService {
   }
 
   @Override
-  public Programacao busca(String id) {
+  public Programacao busca(final String id) {
     return programacaoRepository.findOne(id);
   }
 
-  public List<Programacao> pesquisa(String titulo, Status status) {
-    return ofNullable(status)
-        .map(s -> programacaoRepository.findByTituloLikeAndStatusOrderByDataTerminoDesc(titulo, s))
-        .orElse(programacaoRepository.findByTituloLikeOrderByDataTerminoDesc(titulo));
+  public List<Programacao> pesquisa(final String titulo, final Status status) {
+    return nonNull(status) ?
+        programacaoRepository.findByTituloLikeAndStatusOrderByDataTerminoDesc(titulo, status) :
+        programacaoRepository.findByTituloLikeOrderByDataTerminoDesc(titulo);
   }
 
   @Override
-  public List<Programacao> pesquisa(LocalDateTime versao) {
-    return ofNullable(versao)
-        .map(data -> programacaoRepository.findByDataAtualizacaoAfter(data))
-        .orElse(programacaoRepository.findByStatus(Status.ATIVO));
+  public List<Programacao> pesquisa(final LocalDateTime versao) {
+    return nonNull(versao) ?
+        programacaoRepository.findByDataAtualizacaoAfter(versao) :
+        programacaoRepository.findByStatus(Status.ATIVO);
   }
 
-  private void preparaParaSalvar(Programacao programacao, Programacao programacaoParaSalvar) {
+  private void preparaParaSalvar(final Programacao programacao, final Programacao programacaoParaSalvar) {
     programacaoParaSalvar.setLocal(trimToNull(programacao.getLocal()));
     programacaoParaSalvar.setDescricao(trimToNull(programacao.getDescricao()));
     programacaoParaSalvar.setEndereco(trimToNull(programacao.getEndereco()));

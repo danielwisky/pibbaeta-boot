@@ -24,7 +24,7 @@ public class DispositivoServiceImpl implements DispositivoService {
 
   @Async
   @Override
-  public void adiciona(Dispositivo dispositivo) {
+  public void adiciona(final Dispositivo dispositivo) {
     dispositivoRepository.insert(dispositivo);
   }
 
@@ -35,10 +35,11 @@ public class DispositivoServiceImpl implements DispositivoService {
 
   @Async
   @Override
-  public void enviaNotificacao(Programacao programacao) {
+  public void enviaNotificacao(final Programacao programacao) {
     try {
-      FirebaseSender sender = new FirebaseSender(firebaseConfigService.getConfig());
-      sender.enviar(new AgendaResponse(programacao));
+      final FirebaseSender sender = new FirebaseSender(firebaseConfigService.getConfig());
+      final AgendaResponse agendaResponse = new AgendaResponse(programacao);
+      sender.enviar(agendaResponse);
     } catch (IOException e) {
       log.error(e.getMessage(), e);
     }

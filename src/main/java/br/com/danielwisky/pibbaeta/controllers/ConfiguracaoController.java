@@ -25,10 +25,10 @@ public class ConfiguracaoController {
   private UsuarioValidator usuarioValidator;
 
   @RequestMapping(method = RequestMethod.GET)
-  public String config(Usuario usuario, boolean containErrors, Model model) {
+  public String config(final Usuario usuario, final boolean containErrors, final Model model) {
 
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    Usuario user = containErrors ? usuario : (Usuario) authentication.getPrincipal();
+    final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    final Usuario user = containErrors ? usuario : (Usuario) authentication.getPrincipal();
 
     model.addAttribute("usuario", user);
     model.addAttribute("menu", "autenticado");
@@ -37,10 +37,10 @@ public class ConfiguracaoController {
   }
 
   @RequestMapping(method = RequestMethod.POST)
-  public String salva(Usuario usuario, BindingResult bindingResult,
-      RedirectAttributes redirectAttributes, Locale locale, Model model) {
+  public String salva(final Usuario usuario, final BindingResult bindingResult,
+      final RedirectAttributes redirectAttributes, final Locale locale, final Model model) {
 
-    Usuario usuarioParaAtualizar = usuarioService.preparaParaAtualizarAutenticado(usuario);
+    final Usuario usuarioParaAtualizar = usuarioService.preparaParaAtualizarAutenticado(usuario);
     usuarioValidator.validateUpdate(usuarioParaAtualizar, bindingResult);
 
     if (bindingResult.hasErrors()) {

@@ -21,7 +21,7 @@ public class PedidoOracaoServiceImpl implements PedidoOracaoService {
 
   @Async
   @Override
-  public void adiciona(PedidoOracao pedidoOracao) {
+  public void adiciona(final PedidoOracao pedidoOracao) {
     preparaParaSalvar(pedidoOracao);
     pedidoOracaoRepository.insert(pedidoOracao);
   }
@@ -31,7 +31,7 @@ public class PedidoOracaoServiceImpl implements PedidoOracaoService {
     return pedidoOracaoRepository.findAll(new Sort(Direction.DESC, "data"));
   }
 
-  private void preparaParaSalvar(PedidoOracao pedidoOracao) {
+  private void preparaParaSalvar(final PedidoOracao pedidoOracao) {
     pedidoOracao.setNome(trimToNull(pedidoOracao.getNome()));
     pedidoOracao.setEmail(trimToNull(pedidoOracao.getEmail()));
     pedidoOracao.setTelefone(trimToNull(pedidoOracao.getTelefone()));

@@ -6,7 +6,6 @@ import br.com.danielwisky.pibbaeta.firebase.FirebaseClient;
 import br.com.danielwisky.pibbaeta.models.FirebaseConfig;
 import br.com.danielwisky.pibbaeta.repositories.FirebaseConfigRepository;
 import br.com.danielwisky.pibbaeta.services.FirebaseConfigService;
-import java.io.IOException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,12 +16,12 @@ public class FirebaseConfigServiceImpl implements FirebaseConfigService {
   private FirebaseConfigRepository firebaseConfigRepository;
 
   @Override
-  public void salva(FirebaseConfig firebaseConfig) {
+  public void salva(final FirebaseConfig firebaseConfig) {
     firebaseConfigRepository.save(firebaseConfig);
   }
 
   @Override
-  public boolean tokenValido() throws IOException {
+  public boolean tokenValido() {
     return new FirebaseClient(getConfig()).validaAPIKey();
   }
 

@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface PedidoOracaoService {
 
-  void adiciona(PedidoOracao pedidoOracao);
+  void adiciona(final PedidoOracao pedidoOracao);
 
   List<PedidoOracao> lista();
 }

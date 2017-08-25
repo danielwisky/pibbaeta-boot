@@ -5,9 +5,9 @@ import java.io.IOException;
 
 public interface FirebaseConfigService {
 
-  void salva(FirebaseConfig firebaseConfig);
+  void salva(final FirebaseConfig firebaseConfig);
 
-  boolean tokenValido() throws IOException;
+  boolean tokenValido();
 
   FirebaseConfig getConfig();
 }

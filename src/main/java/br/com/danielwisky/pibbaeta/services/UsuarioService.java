@@ -5,19 +5,19 @@ import java.util.List;
 
 public interface UsuarioService {
 
-  void adiciona(Usuario usuario);
+  void adiciona(final Usuario usuario);
 
-  void altera(Usuario usuario);
+  void altera(final Usuario usuario);
 
   List<Usuario> lista();
 
-  Usuario busca(String id);
+  Usuario busca(final String id);
 
-  Usuario preparaParaAtualizar(Usuario usuario, String id);
+  Usuario preparaParaAtualizar(final Usuario usuario, final String id);
 
-  Usuario preparaParaAtualizarAutenticado(Usuario usuario);
+  Usuario preparaParaAtualizarAutenticado(final Usuario usuario);
 
-  boolean checaExisteLogin(String login, String id);
+  boolean checaExisteLogin(final String login, final String id);
 
-  boolean checaExisteEmail(String email, String id);
+  boolean checaExisteEmail(final String email, final String id);
 }

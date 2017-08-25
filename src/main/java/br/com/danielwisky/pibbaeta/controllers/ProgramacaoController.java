@@ -28,14 +28,15 @@ public class ProgramacaoController {
   private TipoProgramacaoService tipoProgramacaoService;
 
   @RequestMapping(method = RequestMethod.GET)
-  public String lista(Model model) {
+  public String lista(final Model model) {
     loadFormDependencies(model);
     return "programacao/lista";
   }
 
   @RequestMapping(method = RequestMethod.POST)
-  public String salva(@Valid Programacao programacao,
-      BindingResult bindingResult, RedirectAttributes redirectAttributes, Locale locale, Model model) {
+  public String salva(@Valid final Programacao programacao,
+      final BindingResult bindingResult, final RedirectAttributes redirectAttributes,
+      final Locale locale, final Model model) {
 
     if (bindingResult.hasErrors()) {
       return adiciona(programacao, model);
@@ -49,16 +50,16 @@ public class ProgramacaoController {
   }
 
   @RequestMapping("/adicionar")
-  public String adiciona(Programacao programacao, Model model) {
+  public String adiciona(final Programacao programacao, final Model model) {
     loadFormDependencies(model);
     return "programacao/adicionar";
   }
 
   @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-  public String detalhe(@PathVariable("id") String id, Programacao programacao,
-      Model model, boolean containErrors) {
+  public String detalhe(@PathVariable("id") final String id, final Programacao programacao,
+      final Model model, final boolean containErrors) {
 
-    Programacao prog = containErrors ? programacao : programacaoService.busca(id);
+    final Programacao prog = containErrors ? programacao : programacaoService.busca(id);
 
     model.addAttribute("programacao", prog);
     loadFormDependencies(model);
@@ -66,8 +67,9 @@ public class ProgramacaoController {
   }
 
   @RequestMapping(value = "/{id}", method = RequestMethod.POST)
-  public String atualiza(@PathVariable("id") String id, @Valid Programacao programacao,
-      BindingResult bindingResult, RedirectAttributes redirectAttributes, Locale locale, Model model) {
+  public String atualiza(@PathVariable("id") final String id, @Valid final Programacao programacao,
+      final BindingResult bindingResult, final RedirectAttributes redirectAttributes,
+      final Locale locale, final Model model) {
 
     if (bindingResult.hasErrors()) {
       return detalhe(id, programacao, model, true);
@@ -82,11 +84,11 @@ public class ProgramacaoController {
 
   @RequestMapping(value = "/pesquisa")
   public @ResponseBody
-  List<Programacao> pesquisa(String titulo, Status status) {
+  List<Programacao> pesquisa(final String titulo, final Status status) {
     return programacaoService.pesquisa(titulo, status);
   }
 
-  private Model loadFormDependencies(Model model) {
+  private Model loadFormDependencies(final Model model) {
     model.addAttribute("menu", "cadastro");
     model.addAttribute("tipos", tipoProgramacaoService.lista());
     model.addAttribute("statuses", Status.values());

@@ -23,9 +23,11 @@ public class FirebaseConfigController {
   private FirebaseConfigService firebaseConfigService;
 
   @RequestMapping(method = RequestMethod.GET)
-  public String config(FirebaseConfig firebaseConfig, boolean containErrors, Model model) {
+  public String config(final FirebaseConfig firebaseConfig, final boolean containErrors,
+      final Model model) {
 
-    FirebaseConfig config = containErrors ? firebaseConfig : firebaseConfigService.getConfig();
+    final FirebaseConfig config =
+        containErrors ? firebaseConfig : firebaseConfigService.getConfig();
 
     model.addAttribute("menu", "firebase");
     model.addAttribute("firebaseConfig", config);
@@ -34,8 +36,8 @@ public class FirebaseConfigController {
   }
 
   @RequestMapping(method = RequestMethod.POST)
-  public String salva(@Valid FirebaseConfig firebaseConfig, BindingResult bindingResult,
-      RedirectAttributes redirectAttributes, Locale locale, Model model) throws IOException {
+  public String salva(@Valid final FirebaseConfig firebaseConfig, final BindingResult bindingResult,
+      final RedirectAttributes redirectAttributes, final Locale locale, final Model model) {
 
     if (bindingResult.hasErrors()) {
       return config(firebaseConfig, true, model);

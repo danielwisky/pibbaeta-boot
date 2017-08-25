@@ -28,14 +28,14 @@ public class UsuarioController {
   private MessageSource messageSource;
 
   @RequestMapping(method = RequestMethod.GET)
-  public String lista(Model model) {
+  public String lista(final Model model) {
     loadFormDependencies(model);
     return "usuario/lista";
   }
 
   @RequestMapping(method = RequestMethod.POST)
-  public String salva(Usuario usuario, BindingResult bindingResult,
-      RedirectAttributes redirectAttributes, Locale locale, Model model) {
+  public String salva(final Usuario usuario, final BindingResult bindingResult,
+      final RedirectAttributes redirectAttributes, final Locale locale, final Model model) {
 
     usuarioValidator.validateInsert(usuario, bindingResult);
 
@@ -51,16 +51,16 @@ public class UsuarioController {
   }
 
   @RequestMapping("/adicionar")
-  public String adiciona(Usuario usuario, Model model) {
+  public String adiciona(final Usuario usuario, final Model model) {
     loadFormDependencies(model);
     return "usuario/adicionar";
   }
 
   @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-  public String detalhe(@PathVariable("id") String id, Usuario usuario,
-      Model model, boolean containErrors) {
+  public String detalhe(@PathVariable("id") final String id, final Usuario usuario,
+      final Model model, final boolean containErrors) {
 
-    Usuario user = containErrors ? usuario : usuarioService.busca(id);
+    final Usuario user = containErrors ? usuario : usuarioService.busca(id);
 
     model.addAttribute("usuario", user);
     loadFormDependencies(model);
@@ -68,11 +68,11 @@ public class UsuarioController {
   }
 
   @RequestMapping(value = "/{id}", method = RequestMethod.POST)
-  public String atualiza(@PathVariable("id") String id, Usuario usuario,
-      BindingResult bindingResult, RedirectAttributes redirectAttributes,
-      Locale locale, Model model) {
+  public String atualiza(@PathVariable("id") final String id, final Usuario usuario,
+      final BindingResult bindingResult, final RedirectAttributes redirectAttributes,
+      final Locale locale, final Model model) {
 
-    Usuario usuarioParaAtualizar = usuarioService.preparaParaAtualizar(usuario, id);
+    final Usuario usuarioParaAtualizar = usuarioService.preparaParaAtualizar(usuario, id);
     usuarioValidator.validateUpdate(usuarioParaAtualizar, bindingResult);
 
     if (bindingResult.hasErrors()) {
@@ -92,7 +92,7 @@ public class UsuarioController {
     return usuarioService.lista();
   }
 
-  private Model loadFormDependencies(Model model) {
+  private Model loadFormDependencies(final Model model) {
     model.addAttribute("menu", "cadastro");
     model.addAttribute("statuses", Status.values());
     model.addAttribute("papeis", Papel.values());

@@ -21,17 +21,17 @@ public class UsuarioServiceImpl implements UsuarioService {
   private UsuarioRepository usuarioRepository;
 
   @Override
-  public void adiciona(Usuario usuario) {
+  public void adiciona(final Usuario usuario) {
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
     usuario.setSenha(encoder.encode(usuario.getSenha()));
     usuarioRepository.insert(usuario);
   }
 
   @Override
-  public void altera(Usuario usuario) {
+  public void altera(final Usuario usuario) {
 
     if (isNotBlank(usuario.getNovaSenha())) {
-      BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+      final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
       usuario.setSenha(encoder.encode(usuario.getNovaSenha()));
     }
 
@@ -44,12 +44,12 @@ public class UsuarioServiceImpl implements UsuarioService {
   }
 
   @Override
-  public Usuario busca(String id) {
+  public Usuario busca(final String id) {
     return usuarioRepository.findOne(id);
   }
 
   @Override
-  public Usuario preparaParaAtualizar(Usuario usuario, String id) {
+  public Usuario preparaParaAtualizar(final Usuario usuario, final String id) {
 
     Usuario user = usuarioRepository.findOne(id);
 
@@ -65,7 +65,7 @@ public class UsuarioServiceImpl implements UsuarioService {
   }
 
   @Override
-  public Usuario preparaParaAtualizarAutenticado(Usuario usuario) {
+  public Usuario preparaParaAtualizarAutenticado(final Usuario usuario) {
 
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     Usuario autenticado = (Usuario) authentication.getPrincipal();
@@ -80,14 +80,14 @@ public class UsuarioServiceImpl implements UsuarioService {
   }
 
   @Override
-  public boolean checaExisteLogin(String login, String id) {
+  public boolean checaExisteLogin(final String login, final String id) {
     return isBlank(id) ?
         usuarioRepository.existsByLogin(login) :
         usuarioRepository.existsByLoginAndIdNot(login, id);
   }
 
   @Override
-  public boolean checaExisteEmail(String email, String id) {
+  public boolean checaExisteEmail(final String email, final String id) {
     return isBlank(id) ?
         usuarioRepository.existsByEmail(email) :
         usuarioRepository.existsByEmailAndIdNot(email, id);
