@@ -4,19 +4,16 @@ import br.com.danielwisky.pibbaeta.models.FirebaseConfig;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-import okhttp3.Response;
 
+@Slf4j
 public class FirebaseClient {
 
   private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-
-  protected static final String ERROR = "error";
-  protected static final String INVALID_REGISTRATION = "InvalidRegistration";
-  protected static final String NOT_REGISTERED = "NotRegistered";
 
   protected OkHttpClient client = new OkHttpClient();
   protected ObjectMapper mapper = new ObjectMapper();
@@ -24,12 +21,12 @@ public class FirebaseClient {
   private String URL;
   private String API_KEY;
 
-  public FirebaseClient(FirebaseConfig config) throws IOException {
+  public FirebaseClient(FirebaseConfig config) {
     URL = config.getUrl();
     API_KEY = config.getApikey();
   }
 
-  protected Request criaRequisicaoParaPost(String json) {
+  protected Request enviar(String json) {
     RequestBody body = RequestBody.create(JSON, json);
     Request request = new Request.Builder()
         .url(URL)
@@ -39,18 +36,17 @@ public class FirebaseClient {
     return request;
   }
 
-  public boolean validaAPIKey() throws IOException {
-    Request request = criaRequisicaoParaPost(jsonTeste());
-    Response response = client.newCall(request).execute();
-    boolean sucesso = response.isSuccessful();
-    response.close();
-    return sucesso;
+  public boolean validaAPIKey() {
+    try {
+      Request request = enviar(getJsonTeste());
+      return client.newCall(request).execute().isSuccessful();
+    } catch (IOException e) {
+      log.error(e.getMessage(), e);
+      return false;
+    }
   }
 
-  private String jsonTeste() throws JsonProcessingException {
-    Mensagem mensagem = new Mensagem();
-    mensagem.setTo("teste");
-    String jsonTeste = mapper.writeValueAsString(mensagem);
-    return jsonTeste;
+  private String getJsonTeste() throws JsonProcessingException {
+    return mapper.writeValueAsString(new Mensagem("teste"));
   }
 }
