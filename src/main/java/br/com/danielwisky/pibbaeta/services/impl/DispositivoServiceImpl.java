@@ -1,9 +1,7 @@
 package br.com.danielwisky.pibbaeta.services.impl;
 
 import br.com.danielwisky.pibbaeta.api.v1.resources.response.AgendaResponse;
-import br.com.danielwisky.pibbaeta.api.v1.resources.response.ProgramacaoResponse;
 import br.com.danielwisky.pibbaeta.firebase.FirebaseSender;
-import br.com.danielwisky.pibbaeta.firebase.Mensagem;
 import br.com.danielwisky.pibbaeta.models.Dispositivo;
 import br.com.danielwisky.pibbaeta.models.Programacao;
 import br.com.danielwisky.pibbaeta.repositories.DispositivoRepository;

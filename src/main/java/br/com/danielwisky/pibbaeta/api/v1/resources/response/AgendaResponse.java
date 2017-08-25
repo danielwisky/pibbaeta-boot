@@ -3,7 +3,6 @@ package br.com.danielwisky.pibbaeta.api.v1.resources.response;
 import br.com.danielwisky.pibbaeta.models.Programacao;
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import lombok.Getter;
 
