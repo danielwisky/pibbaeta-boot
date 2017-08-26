@@ -1,6 +1,7 @@
 package br.com.danielwisky.pibbaeta.firebase;
 
 import br.com.danielwisky.pibbaeta.models.FirebaseConfig;
+import br.com.danielwisky.pibbaeta.utils.JsonUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
@@ -16,7 +17,6 @@ public class FirebaseClient {
   private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
   protected OkHttpClient client = new OkHttpClient();
-  protected ObjectMapper mapper = new ObjectMapper();
 
   private String URL;
   private String API_KEY;
@@ -47,6 +47,6 @@ public class FirebaseClient {
   }
 
   private String getJsonTeste() throws JsonProcessingException {
-    return mapper.writeValueAsString(new Mensagem("teste"));
+    return JsonUtils.toJson(new Mensagem("teste"));
   }
 }
