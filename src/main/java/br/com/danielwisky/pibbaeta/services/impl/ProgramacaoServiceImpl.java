@@ -60,6 +60,5 @@ public class ProgramacaoServiceImpl implements ProgramacaoService {
     programacaoParaSalvar.setTitulo(trimToNull(programacao.getTitulo()));
     programacaoParaSalvar.setStatus(programacao.getStatus());
     programacaoParaSalvar.setTipo(programacao.getTipo());
-    programacaoParaSalvar.setDataAtualizacao(LocalDateTime.now());
   }
 }

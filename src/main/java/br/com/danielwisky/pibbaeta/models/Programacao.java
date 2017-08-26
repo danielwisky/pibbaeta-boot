@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -37,7 +39,10 @@ public class Programacao implements Serializable {
   @NotNull
   private Tipo tipo;
   private String observacao;
+  @Indexed
+  @LastModifiedDate
   private LocalDateTime dataAtualizacao;
   @NotNull
+  @Indexed
   private Status status = Status.ATIVO;
 }
