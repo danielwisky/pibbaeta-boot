@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface DispositivoService {
 
-  void adiciona(final Dispositivo dispositivo);
+  void adiciona(Dispositivo dispositivo);
 
   List<Dispositivo> lista();
 
-  void enviaNotificacao(final Programacao programacao);
+  void enviaNotificacao(Programacao programacao);
 }
