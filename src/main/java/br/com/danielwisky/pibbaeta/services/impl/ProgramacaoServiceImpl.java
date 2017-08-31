@@ -60,5 +60,9 @@ public class ProgramacaoServiceImpl implements ProgramacaoService {
     programacaoParaSalvar.setTitulo(trimToNull(programacao.getTitulo()));
     programacaoParaSalvar.setStatus(programacao.getStatus());
     programacaoParaSalvar.setTipo(programacao.getTipo());
+    programacaoParaSalvar.setUrlBanner(trimToNull(programacao.getUrlBanner()));
+    programacaoParaSalvar.setObservacao(trimToNull(programacao.getObservacao()));
+    programacaoParaSalvar.setDataInicio(programacao.getDataInicio());
+    programacaoParaSalvar.setDataTermino(programacao.getDataTermino());
   }
 }
