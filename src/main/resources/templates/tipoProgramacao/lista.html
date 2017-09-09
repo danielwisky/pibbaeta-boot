@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layouts/layout}">
+<head></head>
+<body>
+  <th:block layout:fragment="extraStyles">
+    <link rel="stylesheet" th:href="@{/plugins/bootstrap-table/bootstrap-table.min.css}" />
+  </th:block>
+  <th:block layout:fragment="content">
+    <div class="page-header">
+      <div class='pull-right'>
+        <a th:href="@{/tipo-programacao/adicionar}" class="btn btn-primary" th:text="#{adicionar}"></a>
+      </div>
+      <h1 th:text="#{tipo.programacao}"></h1>
+    </div>
+
+    <th:block th:if="${sucesso != null}">
+      <div class="alert-animate alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <th:block th:text="${sucesso}" />
+      </div>
+    </th:block>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <table id="table"
+               data-toggle="table"
+               data-height="400"
+               data-pagination="true"
+               data-page-list="[5, 10, 20, 50]"
+               data-query-params="queryParams"
+               data-url="/tipo-programacao/pesquisa">
+          <thead>
+            <tr>
+              <th data-field="descricao" data-sortable="true" th:text="#{tipo.programacao}"></th>
+              <th data-formatter="acaoFormat" th:text="#{acao}"></th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+
+  </th:block>
+
+  <th:block layout:fragment="extraScripts">
+    <script th:src="@{/plugins/bootstrap-table/bootstrap-table.min.js}"></script>
+    <script th:src="@{/plugins/bootstrap-table/locale/bootstrap-table-pt-BR.js}"></script>
+    <script>
+      function acaoFormat(value, row, index) {
+        return "<a href='/tipo-programacao/" + row.id + "' data-toggle='tooltip' data-placement='left' title='Editar'><i class='glyphicon glyphicon-edit'></i></a>";
+      }
+    </script>
+  </th:block>
+</body>
+</html>

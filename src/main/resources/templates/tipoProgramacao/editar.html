@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layouts/layout}">
+<head></head>
+<body>
+  <th:block layout:fragment="content">
+    <div class="page-header">
+      <h1><th:block th:text="#{editar}"/> <small th:text="#{tipo.programacao}"></small></h1>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-offset-2 col-lg-8">
+        <form th:action="@{/tipo-programacao/} + ${id}" th:object="${tipoProgramacao}" th:method="post">
+          <th:block th:replace="tipoProgramacao/form :: form" />
+        </form>
+      </div>
+    </div>
+  </th:block>
+</body>
+</html>

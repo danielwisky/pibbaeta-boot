@@ -3,7 +3,8 @@ package br.com.danielwisky.pibbaeta.api.v1.resources.response;
 import static java.util.Objects.nonNull;
 
 import br.com.danielwisky.pibbaeta.models.Programacao;
-import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Getter;
@@ -14,8 +15,8 @@ public class ProgramacaoResponse {
   private String id;
   private String titulo;
   private String descricao;
-  private LocalDateTime dataInicio;
-  private LocalDateTime dataTermino;
+  private ZonedDateTime dataInicio;
+  private ZonedDateTime dataTermino;
   private String local;
   private String endereco;
   private String urlBanner;
@@ -27,8 +28,8 @@ public class ProgramacaoResponse {
     this.id = programacao.getId();
     this.titulo = programacao.getTitulo();
     this.descricao = programacao.getDescricao();
-    this.dataInicio = programacao.getDataInicio();
-    this.dataTermino = programacao.getDataTermino();
+    this.dataInicio = programacao.getDataInicio().atZone(ZoneId.of("America/Sao_Paulo"));
+    this.dataTermino = programacao.getDataTermino().atZone(ZoneId.of("America/Sao_Paulo"));
     this.local = programacao.getLocal();
     this.endereco = programacao.getEndereco();
     this.urlBanner = programacao.getUrlBanner();
