@@ -9,6 +9,8 @@ public interface ProgramacaoService {
 
   void adiciona(Programacao programacao);
 
+  void altera(Programacao programacao);
+
   void altera(Programacao programacao, String id);
 
   Programacao busca(String id);
@@ -16,4 +18,6 @@ public interface ProgramacaoService {
   List<Programacao> pesquisa(String titulo, Status status);
 
   List<Programacao> pesquisa(LocalDateTime versao);
+
+  List<Programacao> pesquisa(LocalDateTime dataTermino, Status status);
 }

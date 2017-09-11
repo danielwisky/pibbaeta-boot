@@ -28,6 +28,11 @@ public class ProgramacaoServiceImpl implements ProgramacaoService {
   }
 
   @Override
+  public void altera(Programacao programacao) {
+    programacaoRepository.save(programacao);
+  }
+
+  @Override
   public void altera(final Programacao programacao, final String id) {
     Programacao programacaoParaAtualizar = programacaoRepository.findOne(id);
     preparaParaSalvar(programacao, programacaoParaAtualizar);
@@ -51,6 +56,11 @@ public class ProgramacaoServiceImpl implements ProgramacaoService {
     return nonNull(versao) ?
         programacaoRepository.findByDataAtualizacaoAfter(versao) :
         programacaoRepository.findByStatus(Status.ATIVO);
+  }
+
+  @Override
+  public List<Programacao> pesquisa(final LocalDateTime dataTermino, final Status status) {
+   return programacaoRepository.findByDataTerminoBeforeAndStatus(dataTermino, status);
   }
 
   private void preparaParaSalvar(final Programacao programacao, final Programacao programacaoParaSalvar) {
