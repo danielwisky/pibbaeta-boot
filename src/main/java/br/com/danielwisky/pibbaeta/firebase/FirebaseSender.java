@@ -15,22 +15,24 @@ public class FirebaseSender extends FirebaseClient {
 
   private static final String TOPICS_AGENDA = "/topics/agenda";
 
-  public FirebaseSender(FirebaseConfig config) {
+  public FirebaseSender(final FirebaseConfig config) {
     super(config);
   }
 
-  public void enviar(AgendaResponse agendaResponse) throws IOException {
+  public void enviar(final AgendaResponse agendaResponse) throws IOException {
 
-    Mensagem mensagem = new Mensagem();
+    final Mensagem mensagem = new Mensagem();
     mensagem.put("agendaResponse", agendaResponse);
     mensagem.setTo(TOPICS_AGENDA);
 
-    String json = JsonUtils.toJson(mensagem);
-    Request request = enviar(json);
+    final String json = JsonUtils.toJson(mensagem);
+    final Request request = enviar(json);
+
     client.newCall(request).enqueue(new Callback() {
       @Override
       public void onResponse(Call call, Response response) throws IOException {
         log.info(response.message());
+        response.close();
       }
 
       @Override

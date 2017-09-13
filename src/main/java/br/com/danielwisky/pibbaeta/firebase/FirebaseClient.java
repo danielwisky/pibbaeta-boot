@@ -27,8 +27,8 @@ public class FirebaseClient {
   }
 
   protected Request enviar(String json) {
-    RequestBody body = RequestBody.create(JSON, json);
-    Request request = new Request.Builder()
+    final RequestBody body = RequestBody.create(JSON, json);
+    final Request request = new Request.Builder()
         .url(URL)
         .addHeader("Authorization", "key=" + API_KEY)
         .post(body)
@@ -38,7 +38,7 @@ public class FirebaseClient {
 
   public boolean validaAPIKey() {
     try {
-      Request request = enviar(getJsonTeste());
+      final Request request = enviar(getJsonTeste());
       return client.newCall(request).execute().isSuccessful();
     } catch (IOException e) {
       log.error(e.getMessage(), e);
