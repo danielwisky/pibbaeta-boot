@@ -30,6 +30,7 @@
           </li>
           <li th:classappend="${menu eq 'pedidoOracao' ? 'active' : ''}"><a th:href="@{/pedido-oracao}" th:text="#{pedido.oracao}"></a></li>
           <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+            <li th:classappend="${menu eq 'feedback' ? 'active' : ''}"><a th:href="@{/feedback}" th:text="#{feedback}"></a></li>
             <li th:classappend="${menu eq 'firebase' ? 'active' : ''}"><a th:href="@{/firebase}" th:text="#{firebase}"></a></li>
           </th:block>
         </ul>

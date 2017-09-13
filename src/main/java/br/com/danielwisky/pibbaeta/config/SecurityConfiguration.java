@@ -23,6 +23,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .antMatchers("/rest/**").permitAll()
         .antMatchers("/usuario/**").hasRole("ADMIN")
         .antMatchers("/firebase/**").hasRole("ADMIN")
+        .antMatchers("/feedback/**").hasRole("ADMIN")
         .anyRequest().authenticated()
         .and().formLogin().loginPage("/login").permitAll()
         .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
