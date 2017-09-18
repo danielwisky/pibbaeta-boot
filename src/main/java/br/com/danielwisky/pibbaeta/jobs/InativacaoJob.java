@@ -21,7 +21,7 @@ public class InativacaoJob {
 
   @Scheduled(cron = "0 0 6 * * *")
   public void execute() {
-    List<Programacao> programacoes = programacaoService.pesquisa(LocalDateTime.now(), Status.ATIVO);
+    final List<Programacao> programacoes = programacaoService.pesquisa(LocalDateTime.now(), Status.ATIVO);
     ofNullable(programacoes).ifPresent(programacaos -> {
       programacaos.forEach(programacao -> {
         log.info("inativando programação - {}", programacao);

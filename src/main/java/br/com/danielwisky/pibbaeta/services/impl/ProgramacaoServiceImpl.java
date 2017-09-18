@@ -34,7 +34,7 @@ public class ProgramacaoServiceImpl implements ProgramacaoService {
 
   @Override
   public void altera(final Programacao programacao, final String id) {
-    Programacao programacaoParaAtualizar = programacaoRepository.findOne(id);
+    final Programacao programacaoParaAtualizar = programacaoRepository.findOne(id);
     preparaParaSalvar(programacao, programacaoParaAtualizar);
     programacaoRepository.save(programacaoParaAtualizar);
     dispositivoService.enviaNotificacao(programacaoParaAtualizar);
