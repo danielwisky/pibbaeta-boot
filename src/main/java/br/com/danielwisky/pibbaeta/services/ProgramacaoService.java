@@ -20,4 +20,6 @@ public interface ProgramacaoService {
   List<Programacao> pesquisa(LocalDateTime versao);
 
   List<Programacao> pesquisa(LocalDateTime dataTermino, Status status);
+
+  List<Programacao> listaHoje();
 }

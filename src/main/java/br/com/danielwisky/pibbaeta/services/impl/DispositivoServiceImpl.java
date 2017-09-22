@@ -2,6 +2,7 @@ package br.com.danielwisky.pibbaeta.services.impl;
 
 import br.com.danielwisky.pibbaeta.api.v1.resources.response.AgendaResponse;
 import br.com.danielwisky.pibbaeta.firebase.FirebaseSender;
+import br.com.danielwisky.pibbaeta.firebase.Notificacao;
 import br.com.danielwisky.pibbaeta.models.Dispositivo;
 import br.com.danielwisky.pibbaeta.models.Programacao;
 import br.com.danielwisky.pibbaeta.repositories.DispositivoRepository;
@@ -35,11 +36,22 @@ public class DispositivoServiceImpl implements DispositivoService {
 
   @Async
   @Override
-  public void enviaNotificacao(final Programacao programacao) {
+  public void enviaProgramacao(final Programacao programacao) {
     try {
       final FirebaseSender sender = new FirebaseSender(firebaseConfigService.getConfig());
       final AgendaResponse agendaResponse = new AgendaResponse(programacao);
       sender.enviar(agendaResponse);
+    } catch (IOException e) {
+      log.error(e.getMessage(), e);
+    }
+  }
+
+  @Async
+  @Override
+  public void enviaNotificacao(Notificacao notificacao) {
+    try {
+      final FirebaseSender sender = new FirebaseSender(firebaseConfigService.getConfig());
+      sender.enviar(notificacao);
     } catch (IOException e) {
       log.error(e.getMessage(), e);
     }

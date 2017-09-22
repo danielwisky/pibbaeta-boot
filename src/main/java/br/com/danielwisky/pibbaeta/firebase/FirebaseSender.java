@@ -13,7 +13,8 @@ import okhttp3.Response;
 @Slf4j
 public class FirebaseSender extends FirebaseClient {
 
-  private static final String TOPICS_AGENDA = "/topics/agenda";
+  private static final String TOPICS_AGENDA = "/topics/agenda-dev";
+  private static final String TOPICS_NOTIFICACAO = "/topics/notificacao";
 
   public FirebaseSender(final FirebaseConfig config) {
     super(config);
@@ -22,8 +23,31 @@ public class FirebaseSender extends FirebaseClient {
   public void enviar(final AgendaResponse agendaResponse) throws IOException {
 
     final Mensagem mensagem = new Mensagem();
-    mensagem.put("agendaResponse", agendaResponse);
+    mensagem.putData("agendaResponse", agendaResponse);
     mensagem.setTo(TOPICS_AGENDA);
+
+    final String json = JsonUtils.toJson(mensagem);
+    final Request request = enviar(json);
+
+    client.newCall(request).enqueue(new Callback() {
+      @Override
+      public void onResponse(Call call, Response response) throws IOException {
+        log.info(response.message());
+        response.close();
+      }
+
+      @Override
+      public void onFailure(Call call, IOException e) {
+        log.error(e.getMessage(), e);
+      }
+    });
+  }
+
+  public void enviar(final Notificacao notificacao) throws IOException {
+
+    final Mensagem mensagem = new Mensagem();
+    mensagem.setNotification(notificacao);
+    mensagem.setTo(TOPICS_NOTIFICACAO);
 
     final String json = JsonUtils.toJson(mensagem);
     final Request request = enviar(json);

@@ -1,5 +1,9 @@
 package br.com.danielwisky.pibbaeta.services.impl;
 
+import static java.time.LocalDate.now;
+import static java.time.LocalDateTime.of;
+import static java.time.LocalTime.MAX;
+import static java.time.LocalTime.MIN;
 import static java.util.Objects.nonNull;
 import static org.apache.commons.lang3.StringUtils.trimToNull;
 
@@ -18,13 +22,14 @@ import org.springframework.stereotype.Service;
 public class ProgramacaoServiceImpl implements ProgramacaoService {
 
   private ProgramacaoRepository programacaoRepository;
+
   private DispositivoService dispositivoService;
 
   @Override
   public void adiciona(final Programacao programacao) {
     preparaParaSalvar(programacao, programacao);
     programacaoRepository.insert(programacao);
-    dispositivoService.enviaNotificacao(programacao);
+    dispositivoService.enviaProgramacao(programacao);
   }
 
   @Override
@@ -37,7 +42,7 @@ public class ProgramacaoServiceImpl implements ProgramacaoService {
     final Programacao programacaoParaAtualizar = programacaoRepository.findOne(id);
     preparaParaSalvar(programacao, programacaoParaAtualizar);
     programacaoRepository.save(programacaoParaAtualizar);
-    dispositivoService.enviaNotificacao(programacaoParaAtualizar);
+    dispositivoService.enviaProgramacao(programacaoParaAtualizar);
   }
 
   @Override
@@ -60,10 +65,16 @@ public class ProgramacaoServiceImpl implements ProgramacaoService {
 
   @Override
   public List<Programacao> pesquisa(final LocalDateTime dataTermino, final Status status) {
-   return programacaoRepository.findByDataTerminoBeforeAndStatus(dataTermino, status);
+    return programacaoRepository.findByDataTerminoBeforeAndStatus(dataTermino, status);
   }
 
-  private void preparaParaSalvar(final Programacao programacao, final Programacao programacaoParaSalvar) {
+  @Override
+  public List<Programacao> listaHoje() {
+    return programacaoRepository.findByDataInicioBetweenAndStatus(of(now(), MIN), of(now(), MAX), Status.ATIVO);
+  }
+
+  private void preparaParaSalvar(final Programacao programacao,
+      final Programacao programacaoParaSalvar) {
     programacaoParaSalvar.setLocal(trimToNull(programacao.getLocal()));
     programacaoParaSalvar.setDescricao(trimToNull(programacao.getDescricao()));
     programacaoParaSalvar.setEndereco(trimToNull(programacao.getEndereco()));

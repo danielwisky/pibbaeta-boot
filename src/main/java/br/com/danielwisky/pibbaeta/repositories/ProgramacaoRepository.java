@@ -19,4 +19,7 @@ public interface ProgramacaoRepository extends MongoRepository<Programacao, Stri
   List<Programacao> findByStatus(Status ativo);
 
   List<Programacao> findByDataTerminoBeforeAndStatus(LocalDateTime dataTermino, Status status);
+
+  List<Programacao> findByDataInicioBetweenAndStatus(LocalDateTime dataInicio,
+      LocalDateTime dataTermino, Status ativo);
 }
