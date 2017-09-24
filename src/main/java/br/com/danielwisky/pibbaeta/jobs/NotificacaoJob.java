@@ -24,7 +24,7 @@ public class NotificacaoJob {
 
   private DispositivoService dispositivoService;
 
-  @Scheduled(cron = "*/10 * * * * *")
+  @Scheduled(cron = "0 0 10 * * *")
   public void execute() {
     final List<Programacao> programacoes = programacaoService.listaHoje();
     ofNullable(programacoes).ifPresent(programacaos -> {
@@ -32,7 +32,7 @@ public class NotificacaoJob {
         final String titulo = String.format("Lembrete - %1s", programacao.getTitulo());
         final String corpo = programacao.getDataInicio().format(DateTimeFormatter.ofPattern("EEE, dd 'de' MMM 'às' HH:mm"));
         final Notificacao notificacao = new Notificacao(titulo, corpo);
-        //dispositivoService.enviaNotificacao();
+        dispositivoService.enviaNotificacao(notificacao);
         log.info("notificacao - {}", notificacao);
       });
     });

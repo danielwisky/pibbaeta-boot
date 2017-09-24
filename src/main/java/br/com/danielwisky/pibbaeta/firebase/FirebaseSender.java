@@ -13,7 +13,7 @@ import okhttp3.Response;
 @Slf4j
 public class FirebaseSender extends FirebaseClient {
 
-  private static final String TOPICS_AGENDA = "/topics/agenda-dev";
+  private static final String TOPICS_AGENDA = "/topics/agenda";
   private static final String TOPICS_NOTIFICACAO = "/topics/notificacao";
 
   public FirebaseSender(final FirebaseConfig config) {
